@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const { append } = require("express/lib/response");
 
 const router = express.Router();
 
@@ -38,6 +39,44 @@ router.delete("/:id", async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     res.send("Succesful");
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+//follow a user
+router.put("/:id/follow", async (req, res) => {
+  const follower = req.body.id;
+  const toFollow = req.params.id;
+  if (follower === toFollow) return res.send("you cannot follow yourself");
+  try {
+    const followerUser = await User.findById(follower);
+    const toFollowUser = await User.findById(toFollow);
+    if (!followerUser || !toFollowUser) return res.send("User not found");
+    if (followerUser.followings.includes(toFollow))
+      return res.send("You already follow this user");
+    await followerUser.updateOne({ $push: { followings: toFollow } }); // learnt some new
+    await toFollowUser.updateOne({ $push: { followers: follower } }); // stuff here
+    return res.send("successfully added");
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+//unfollow a user
+router.put("/:id/unfollow", async (req, res) => {
+  const follower = req.body.id;
+  const toUnfollow = req.params.id;
+  if (follower === toUnfollow) return res.send("you cannot unfollow yourself");
+  try {
+    const followerUser = await User.findById(follower);
+    const toUnfollowUser = await User.findById(toUnfollow);
+    if (!followerUser || !toUnfollowUser) return res.send("User not found");
+    if (!followerUser.followings.includes(toUnfollow))
+      return res.send("You do not follow this user");
+    await followerUser.updateOne({ $pull: { followings: toUnfollow } });
+    await toUnfollowUser.updateOne({ $pull: { followers: follower } });
+    return res.send("successfully removed");
   } catch (err) {
     res.send(err);
   }

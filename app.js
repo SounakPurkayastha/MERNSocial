@@ -12,7 +12,7 @@ const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 
 app.use(express.json());
-app.use("/users", userRoutes);
-app.use("/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 
 app.listen(3000);
