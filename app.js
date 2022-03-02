@@ -10,9 +10,11 @@ mongoose.connect("mongodb://localhost:27017/project").then(() => {
 //importing routes
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/posts");
 
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
 
 app.listen(3000);
