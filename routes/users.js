@@ -4,8 +4,9 @@ const User = require("../models/user");
 const { append } = require("express/lib/response");
 
 const router = express.Router();
+const Post = require("../models/post");
 
-//READ USER
+//READ user
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -15,7 +16,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-//UPDATE USER
+//UPDATE user
 router.put("/:id", async (req, res) => {
   if (req.params.id != req.body.id) {
     return res.send("Unauthorized"); // only the user can update their account
@@ -31,7 +32,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-//DELETE USER
+//DELETE user
 router.delete("/:id", async (req, res) => {
   if (req.params.id != req.body.id) {
     return res.send("Unauthorized"); // only the user can delete their account
@@ -46,7 +47,7 @@ router.delete("/:id", async (req, res) => {
 
 //follow a user
 router.put("/:id/follow", async (req, res) => {
-  const follower = req.body.id;
+  const follower = req.body.userId;
   const toFollow = req.params.id;
   if (follower === toFollow) return res.send("you cannot follow yourself");
   try {
@@ -80,6 +81,21 @@ router.put("/:id/unfollow", async (req, res) => {
   } catch (err) {
     res.send(err);
   }
+});
+
+//get timeline posts
+router.get("/", async (req, res) => {
+  const user = await User.findById(req.body.userId);
+  const userPosts = await Post.find({ userId: req.body.userId });
+  /// something new here
+  const friendPosts = await Promise.all(
+    user.followings.map((following) => {
+      return Post.find({ userId: following });
+    })
+  );
+  const allPosts = userPosts.concat(...friendPosts);
+  ///
+  res.send(allPosts);
 });
 
 module.exports = router;

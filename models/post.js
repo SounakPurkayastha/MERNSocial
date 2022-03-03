@@ -9,6 +9,9 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  likes: {
+    type: [mongoose.Schema.Types.ObjectId],
+  },
 });
 
 module.exports = new mongoose.model("Post", postSchema);

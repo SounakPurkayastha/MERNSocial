@@ -1,5 +1,6 @@
 const express = require("express");
 const Post = require("../models/post");
+const User = require("../models/user");
 
 const router = new express.Router();
 
@@ -42,6 +43,18 @@ router.delete("/:id", async (req, res) => {
       return res.send("You can only delete your own posts");
     await post.deleteOne();
     res.send("Delete successful");
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+//like a post
+router.put("/:id/like", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.send("Post not found");
+    await post.updateOne({ $push: { likes: req.body.userId } });
+    return res.send("Post liked");
   } catch (err) {
     res.send(err);
   }
