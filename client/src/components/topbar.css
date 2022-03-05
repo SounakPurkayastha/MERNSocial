@@ -1,32 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Roboto:wght@300;400;500;700;900&display=swap");
-
-.topbar-left {
-  flex: 3;
-  display: flex;
-  align-items: center;
-  font-family: Fredoka;
-  color: white;
-  font-size: 30px;
-  margin-left: 120px;
-}
-
-.topbar-center {
-  flex: 6;
-  display: flex;
-  align-items: center;
-}
-
-.topbar-right {
-  flex: 3;
-  display: flex;
-  align-items: center;
-  object-fit: cover;
-}
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap");
 
 .topbar-container {
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  height: 70px;
-  background-color: #161222;
+  justify-content: space-between;
+  font-family: Fredoka;
+  padding: 0.8rem 0;
+  align-items: center;
 }
 
 * {
@@ -34,48 +15,88 @@
   padding: 0;
 }
 
-.topbar-searchbox {
-  width: 70%;
-  height: 60%;
-  background-color: black;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
+nav {
+  background-color: white;
+  width: 100%;
+  border-bottom: solid 0.2rem #21a0a0;
 }
 
-.searchbox-icon {
-  color: white;
-  margin: 0 15px;
+.topbar-logo {
+  font-size: 3rem;
+  color: #21a0a0;
+  flex: 3;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.topbar-img {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+  border: solid #21a0a0 0.2rem;
+  object-fit: cover;
+}
+
+.topbar-searchbox {
+  background-color: #fff;
+  flex: 4;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 3rem;
+  overflow: hidden;
+  border: solid 0.2rem #21a0a0;
 }
 
 .searchbox-input {
-  background-color: black;
+  width: 85%;
+  height: 80%;
   border: none;
-  color: white;
-  width: 80%;
 }
 
 .searchbox-input:focus {
   outline: none;
 }
 
-.topbar-dp {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-}
-
-.topbar-logout {
-  margin-right: 30px;
-  padding: 20px 40px;
-  height: 60%;
-  border-radius: 50px;
-  background-color: #e64c65;
-  border: none;
-  color: white;
-  font-family: Fredoka;
-  font-size: 16px;
+.topbar-user {
+  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.topbar-username {
+  margin-left: 1rem;
+  color: #21a0a0;
+  font-size: 1.5rem;
+}
+
+.searchbox-icon {
+  margin: 0 1rem;
+  font-size: 2rem !important;
+}
+
+.topbar-profile-button {
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 3rem;
+  font-family: Fredoka;
+  font-size: 1.6rem;
+  background-color: #21a0a0;
+  cursor: pointer;
+  color: white;
+}
+
+.profile-button-div {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  .topbar-searchbox {
+    display: none;
+  }
 }

@@ -3,23 +3,22 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Topbar = () => {
   return (
-    <div className="topbar-container">
-      <div className="topbar-left">hetarbashko</div>
-      <div className="topbar-center">
+    <nav>
+      <div className="topbar-container">
+        <span className="topbar-logo">MERNSocial</span>
         <div className="topbar-searchbox">
           <SearchIcon className="searchbox-icon" />
-          <input
-            type="text"
-            placeholder="Search for people, goblins or some shit"
-            className="searchbox-input"
-          />
+          <input type="search" className="searchbox-input" />
+        </div>
+        <div className="profile-button-div">
+          <button className="topbar-profile-button">Profile</button>
+        </div>
+        <div className="topbar-user">
+          <img src="assets/dp.jpg" className="topbar-img" />
+          <span className="topbar-username">Sounak</span>
         </div>
       </div>
-      <div className="topbar-right">
-        <button className="topbar-logout">Logout</button>
-        <img className="topbar-dp" src="assets/dp.jpg" />
-      </div>
-    </div>
+    </nav>
   );
 };
 

@@ -1,0 +1,19 @@
+.main-content {
+  display: flex;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.left-sidebar-container {
+  flex: 3;
+  height: calc(100vh - 6rem);
+}
+
+.center-container {
+  flex: 5;
+}
+
+.right-sidebar-container {
+  flex: 3;
+  background-color: blue;
+}

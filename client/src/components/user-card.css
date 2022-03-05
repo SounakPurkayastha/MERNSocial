@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap");
+
+.user-card-container {
+  height: 8rem;
+  background-color: white;
+  margin: 2rem 1rem;
+  border-radius: 1rem;
+  font-family: Fredoka;
+  display: flex;
+  align-items: center;
+  border: solid 0.2rem #21a0a0;
+  box-shadow: 0.3rem 0.3rem 0.3rem black;
+}
+
+.user-card-container img {
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 2rem;
+  border: solid #21a0a0 0.3rem;
+}
+
+.user-card-email {
+  color: #21a0a0;
+}
+
+.user-card-desc {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+}
+
+@media (max-width: 1000px) {
+  .user-card-container {
+    display: none;
+  }
+}
