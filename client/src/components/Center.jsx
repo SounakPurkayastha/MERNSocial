@@ -31,10 +31,10 @@ const posts = [
   },
 ];
 
-const Center = () => {
+const Center = (props) => {
   return (
     <div>
-      <PostBox />
+      <PostBox clickHandler={props.clickHandler} />
       {posts.map((post) => {
         return (
           <Post
