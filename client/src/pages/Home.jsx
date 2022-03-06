@@ -13,11 +13,12 @@ const Home = () => {
   let [textareaInput, setTextareaInput] = useState("");
   const [currentPosts, setCurrentPosts] = useState([]);
 
-  fetch("http://localhost:8000/api/users/621efdfe053f0644e665c192/timeline")
+  fetch("http://localhost:8000/api/users/6224dd600bf50bae155ba393/timeline")
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       setCurrentPosts(data);
     })
     .catch((err) => console.log(err));
