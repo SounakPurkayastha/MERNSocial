@@ -1,20 +1,9 @@
 import "./ModalBox.css";
 import { useState } from "react";
 
-const ModalBox = () => {
-  let [textareaInput, setTextareaInput] = useState("");
-
+const ModalBox = (props) => {
   const clickHandler = (e) => {
     e.stopPropagation();
-  };
-
-  const postHandler = (e) => {
-    e.preventDefault();
-    console.log(textareaInput);
-  };
-
-  const textareaInputHandler = (e) => {
-    setTextareaInput(e.target.value);
   };
 
   return (
@@ -24,10 +13,9 @@ const ModalBox = () => {
         <div className="modal-username">Sounak</div>
         <div className="modal-useremail">@lord_penguin</div>
       </div>
-      <form onSubmit={postHandler}>
+      <form onSubmit={props.postHandler}>
         <textarea
-          onInput={textareaInputHandler}
-          name="post-text"
+          onInput={props.textareaInputHandler}
           className="modal-textarea"
           placeholder="What's on your mind?"
         ></textarea>

@@ -1,41 +1,13 @@
 import "./center.css";
 import PostBox from "./PostBox";
 import Post from "./Post";
-
-const posts = [
-  {
-    username: "Sounak",
-    age: "2 days ago",
-    text: "I want to die",
-  },
-  {
-    username: "Stan",
-    age: "3 days ago",
-    text: "End my suffering",
-  },
-  {
-    username: "Kyle",
-    age: "5 days ago",
-    text: "Please kill me",
-  },
-  {
-    username: "Eric",
-    age: "5 days ago",
-    text: "Hanging myself today",
-    imageUrl: "assets/dp.jpg",
-  },
-  {
-    username: "Kenny",
-    age: "7 days ago",
-    text: "Some dummy text",
-  },
-];
+import { useState } from "react";
 
 const Center = (props) => {
   return (
     <div>
       <PostBox clickHandler={props.clickHandler} />
-      {posts.map((post) => {
+      {props.currentPosts.map((post) => {
         return (
           <Post
             username={post.username}

@@ -1,4 +1,5 @@
 import "./Modal.css";
+import { useState } from "react";
 import ModalBox from "./ModalBox";
 
 const Modal = (props) => {
@@ -13,7 +14,11 @@ const Modal = (props) => {
         props.showModal ? "modal-container-visible" : "modal-container"
       }
     >
-      <ModalBox onClick={clickHandler} />
+      <ModalBox
+        onClick={clickHandler}
+        textareaInputHandler={props.textareaInputHandler}
+        postHandler={props.postHandler}
+      />
     </div>
   );
 };

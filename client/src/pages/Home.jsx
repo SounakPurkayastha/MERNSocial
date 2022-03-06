@@ -8,16 +8,64 @@ import "./home.css";
 import { useState } from "react";
 
 const Home = () => {
+  const posts = [
+    {
+      username: "Sounak",
+      age: "2 days ago",
+      text: "I want to die",
+    },
+    {
+      username: "Stan",
+      age: "3 days ago",
+      text: "End my suffering",
+    },
+    {
+      username: "Kyle",
+      age: "5 days ago",
+      text: "Please kill me",
+    },
+    {
+      username: "Eric",
+      age: "5 days ago",
+      text: "Hanging myself today",
+      imageUrl: "assets/dp.jpg",
+    },
+    {
+      username: "Kenny",
+      age: "7 days ago",
+      text: "Some dummy text",
+    },
+  ];
   let [showModal, setShowModal] = useState(false);
+  let [textareaInput, setTextareaInput] = useState("");
+  const [currentPosts, setCurrentPosts] = useState(posts);
   //let showModal = false;
+
+  const textareaInputHandler = (e) => {
+    setTextareaInput(e.target.value);
+  };
 
   const onClickHandler = () => {
     setShowModal(!showModal);
   };
 
+  const postHandler = (e) => {
+    setCurrentPosts([
+      { username: "Sounak", age: "10 days ago", text: textareaInput },
+      ...currentPosts,
+    ]);
+    e.preventDefault();
+    onClickHandler();
+  };
+
   return (
     <div>
-      <Modal showModal={showModal} onClick={onClickHandler} />
+      <Modal
+        showModal={showModal}
+        onClick={onClickHandler}
+        textareaInputHandler={textareaInputHandler}
+        postHandler={postHandler}
+      />
       <Topbar />
       <div className="main-content">
         <div className="left-sidebar-container">
@@ -25,7 +73,7 @@ const Home = () => {
         </div>
         <div className="left-sidebar-undercontainer"></div>
         <div className="center-container">
-          <Center clickHandler={onClickHandler} />
+          <Center clickHandler={onClickHandler} currentPosts={currentPosts} />
         </div>
         <div className="right-sidebar-container">
           <RightSidebar />
