@@ -54,6 +54,7 @@ const Home = () => {
       { username: "Sounak", age: "10 days ago", text: textareaInput },
       ...currentPosts,
     ]);
+    setTextareaInput("");
     e.preventDefault();
     onClickHandler();
   };
@@ -65,6 +66,7 @@ const Home = () => {
         onClick={onClickHandler}
         textareaInputHandler={textareaInputHandler}
         postHandler={postHandler}
+        textareaInput={textareaInput}
       />
       <Topbar />
       <div className="main-content">

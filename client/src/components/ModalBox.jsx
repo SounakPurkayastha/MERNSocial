@@ -6,6 +6,8 @@ const ModalBox = (props) => {
     e.stopPropagation();
   };
 
+  const text = props.textareaInput;
+
   return (
     <div className="modal-post-box" onClick={clickHandler}>
       <img className="modal-box-img" src="assets/dp.jpg" />
@@ -18,6 +20,7 @@ const ModalBox = (props) => {
           onInput={props.textareaInputHandler}
           className="modal-textarea"
           placeholder="What's on your mind?"
+          value={text}
         ></textarea>
         <button type="submit" className="modal-post-button">
           Post

@@ -15,6 +15,7 @@ const Modal = (props) => {
       }
     >
       <ModalBox
+        textareaInput={props.textareaInput}
         onClick={clickHandler}
         textareaInputHandler={props.textareaInputHandler}
         postHandler={props.postHandler}
