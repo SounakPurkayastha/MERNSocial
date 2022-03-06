@@ -3,48 +3,24 @@ import LeftSidebar from "../components/LeftSidebar";
 import RightSidebar from "../components/RightSidebar";
 import Center from "../components/Center";
 import Modal from "../components/Modal";
-import ModalBox from "../components/ModalBox";
 import "./home.css";
 import { useState } from "react";
 
 const Home = () => {
-  const posts = [
-    {
-      id: 1,
-      username: "Sounak",
-      age: "2 days ago",
-      text: "I want to die",
-    },
-    {
-      id: 2,
-      username: "Stan",
-      age: "3 days ago",
-      text: "End my suffering",
-    },
-    {
-      id: 3,
-      username: "Kyle",
-      age: "5 days ago",
-      text: "Please kill me",
-    },
-    {
-      id: 4,
-      username: "Eric",
-      age: "5 days ago",
-      text: "Hanging myself today",
-      imageUrl: "assets/dp.jpg",
-    },
-    {
-      id: 5,
-      username: "Kenny",
-      age: "7 days ago",
-      text: "Some dummy text",
-    },
-  ];
+  let newPosts;
+
   let [showModal, setShowModal] = useState(false);
   let [textareaInput, setTextareaInput] = useState("");
-  const [currentPosts, setCurrentPosts] = useState(posts);
-  //let showModal = false;
+  const [currentPosts, setCurrentPosts] = useState([]);
+
+  fetch("http://localhost:8000/api/users/621efdfe053f0644e665c192/timeline")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      setCurrentPosts(data);
+    })
+    .catch((err) => console.log(err));
 
   const textareaInputHandler = (e) => {
     setTextareaInput(e.target.value);
