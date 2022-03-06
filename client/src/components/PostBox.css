@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Roboto:wght@100;300;400&display=swap");
 
 .postbox-container {
-  width: 90%;
+  width: 57rem;
   background-color: white;
   border-radius: 3rem;
   margin: 1rem auto 2rem;
@@ -11,6 +11,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0 0.5rem 0;
+  position: fixed;
+  top: 6rem;
+  left: 47.3rem;
 }
 
 .post-button {

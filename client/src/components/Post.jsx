@@ -12,7 +12,9 @@ const Post = (props) => {
         </div>
       </div>
       <div className="post-text">{props.text}</div>
-      <img className="post-image" src={props.imageUrl} />
+      {props.imageUrl ? (
+        <img className="post-image" src={props.imageUrl} />
+      ) : null}
       <hr />
       <div className="post-buttons">
         <button className="post-card-button">

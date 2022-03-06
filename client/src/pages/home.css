@@ -2,15 +2,23 @@
   display: flex;
   margin: 0 auto;
   width: 90%;
+  margin-top: 6rem;
 }
 
 .left-sidebar-container {
-  flex: 3;
   height: calc(100vh - 6rem);
+  width: 37.2rem;
+  position: fixed;
+  left: 4rem;
+}
+
+.left-sidebar-undercontainer {
+  flex: 3;
 }
 
 .center-container {
   flex: 5;
+  margin-top: 6.5rem;
 }
 
 .right-sidebar-container {
