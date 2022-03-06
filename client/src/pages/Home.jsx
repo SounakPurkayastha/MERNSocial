@@ -10,27 +10,32 @@ import { useState } from "react";
 const Home = () => {
   const posts = [
     {
+      id: 1,
       username: "Sounak",
       age: "2 days ago",
       text: "I want to die",
     },
     {
+      id: 2,
       username: "Stan",
       age: "3 days ago",
       text: "End my suffering",
     },
     {
+      id: 3,
       username: "Kyle",
       age: "5 days ago",
       text: "Please kill me",
     },
     {
+      id: 4,
       username: "Eric",
       age: "5 days ago",
       text: "Hanging myself today",
       imageUrl: "assets/dp.jpg",
     },
     {
+      id: 5,
       username: "Kenny",
       age: "7 days ago",
       text: "Some dummy text",

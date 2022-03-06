@@ -22,7 +22,7 @@ const ModalBox = (props) => {
           placeholder="What's on your mind?"
           value={text}
         ></textarea>
-        <button type="submit" className="modal-post-button">
+        <button type={text ? "submit" : "button"} className="modal-post-button">
           Post
         </button>
       </form>

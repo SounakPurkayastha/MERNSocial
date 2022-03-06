@@ -8,7 +8,6 @@ const PostBox = (props) => {
         <span className="post-prompt" onClick={props.clickHandler}>
           What's on your mind?
         </span>
-        <button className="post-button">Post</button>
       </div>
     </div>
   );

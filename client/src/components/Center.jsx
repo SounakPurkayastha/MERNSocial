@@ -10,6 +10,7 @@ const Center = (props) => {
       {props.currentPosts.map((post) => {
         return (
           <Post
+            key={post.id}
             username={post.username}
             age={post.age}
             text={post.text}
