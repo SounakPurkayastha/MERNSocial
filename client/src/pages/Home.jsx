@@ -30,7 +30,7 @@ const Home = () => {
       const res = await axios.get("/users/timeline", {
         headers: {
           authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjRkZDYwMGJmNTBiYWUxNTViYTM5MyIsImlhdCI6MTY0NjgzMTM0OCwiZXhwIjoxNjQ2ODMyMjQ4fQ.BxnkmKQaCCjUXx1LI7YCqUvv0HJnNqG6UKALHm7PQxQ",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjRkZDYwMGJmNTBiYWUxNTViYTM5MyIsImlhdCI6MTY0NjgzNjMwMiwiZXhwIjoxNjQ2ODM3MjAyfQ.CdKv59ueunbWtbKe1FfKkG1t-976EHFJHkbwzMqT1pM",
         },
       });
       setCurrentPosts(res.data);
