@@ -4,7 +4,7 @@ import RightSidebar from "../components/RightSidebar";
 import Center from "../components/Center";
 import Modal from "../components/Modal";
 import "./home.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Home = () => {
   let newPosts;
@@ -13,15 +13,17 @@ const Home = () => {
   let [textareaInput, setTextareaInput] = useState("");
   const [currentPosts, setCurrentPosts] = useState([]);
 
-  fetch("http://localhost:8000/api/users/6224dd600bf50bae155ba393/timeline")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      setCurrentPosts(data);
-    })
-    .catch((err) => console.log(err));
+  useEffect(() => {
+    fetch("http://localhost:8000/api/users/6224d6e2986de03afe73f378/timeline/")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setCurrentPosts(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const textareaInputHandler = (e) => {
     setTextareaInput(e.target.value);

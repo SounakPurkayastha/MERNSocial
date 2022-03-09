@@ -20,7 +20,7 @@ const Post = (props) => {
         <img className="post-user-img" src="assets/dp.jpg" />
         <div className="post-user-details">
           <span className="post-user-details-name">{props.userId}</span>
-          <span className="post-time-ago">{props.age}</span>
+          <span className="post-time-ago">{props.email}</span>
         </div>
       </div>
       <div className="post-text">{props.text}</div>

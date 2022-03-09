@@ -6,6 +6,25 @@ const { append } = require("express/lib/response");
 const router = express.Router();
 const Post = require("../models/post");
 
+//get timeline posts
+router.get("/:id/timeline", async (req, res) => {
+  const user = await User.findById(req.params.id);
+  const userPosts = await Post.find({ userId: req.params.id }).populate(
+    "userId"
+  );
+  /// something new here
+  const friendPosts = await Promise.all(
+    user.followings.map((following) => {
+      return Post.find({ userId: following })
+        .populate("userId", "username")
+        .populate("userId", "email");
+    })
+  );
+  const allPosts = userPosts.concat(...friendPosts);
+  ///
+  res.send(allPosts);
+});
+
 //READ user
 router.get("/:id", async (req, res) => {
   try {
@@ -81,21 +100,6 @@ router.put("/:id/unfollow", async (req, res) => {
   } catch (err) {
     res.send(err);
   }
-});
-
-//get timeline posts
-router.get("/", async (req, res) => {
-  const user = await User.findById(req.body.userId);
-  const userPosts = await Post.find({ userId: req.body.userId });
-  /// something new here
-  const friendPosts = await Promise.all(
-    user.followings.map((following) => {
-      return Post.find({ userId: following });
-    })
-  );
-  const allPosts = userPosts.concat(...friendPosts);
-  ///
-  res.send(allPosts);
 });
 
 module.exports = router;

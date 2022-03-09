@@ -8,10 +8,12 @@ const Center = (props) => {
     <div>
       <PostBox clickHandler={props.clickHandler} />
       {props.currentPosts.map((post) => {
+        console.log(post);
         return (
           <Post
-            key={post.id}
+            key={post._id}
             userId={post.userId.username}
+            email={post.userId.email}
             age={post.age}
             text={post.text}
             imageUrl={post.imageUrl}
