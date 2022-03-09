@@ -12,11 +12,8 @@ const Center = (props) => {
         return (
           <Post
             key={post._id}
-            userId={post.userId.username}
-            email={post.userId.email}
-            age={post.age}
+            username={post.userId.username}
             text={post.text}
-            imageUrl={post.imageUrl}
           />
         );
       })}

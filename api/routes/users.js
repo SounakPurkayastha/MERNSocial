@@ -7,7 +7,7 @@ const router = express.Router();
 const Post = require("../models/post");
 
 const verifyToken = (req, res, next) => {
-  const auth = req.headers.authentication;
+  const auth = req.headers.authorization;
   if (auth) {
     const token = auth.split(" ")[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, user_id) => {
@@ -25,11 +25,14 @@ const verifyToken = (req, res, next) => {
 //get timeline posts
 router.get("/timeline", verifyToken, async (req, res) => {
   const user = await User.findById(req.user.id);
-  const userPosts = await Post.find({ userId: req.user.id }).populate("userId");
+  const userPosts = await Post.find({ userId: req.user.id }).populate(
+    "userId",
+    "username"
+  );
   /// something new here
   const friendPosts = await Promise.all(
     user.followings.map((following) => {
-      return Post.find({ userId: following }).populate("userId");
+      return Post.find({ userId: following }).populate("userId", "username");
     })
   );
   const allPosts = userPosts.concat(...friendPosts);
