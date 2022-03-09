@@ -5,6 +5,7 @@ import Center from "../components/Center";
 import Modal from "../components/Modal";
 import "./home.css";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
   let newPosts;
@@ -14,15 +15,27 @@ const Home = () => {
   const [currentPosts, setCurrentPosts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/users/6224dd600bf50bae155ba393/timeline/")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setCurrentPosts(data);
-      })
-      .catch((err) => console.log(err));
+    // fetch(
+    //   "http://localhost:8000/api/users/timeline/"
+    // ) /*replace this with axios*/
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     console.log(data);
+    //     setCurrentPosts(data);
+    //   })
+    //   .catch((err) => console.log(err));
+    const fetchPosts = async () => {
+      const res = await axios.get("/users/timeline", {
+        headers: {
+          authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjRkZDYwMGJmNTBiYWUxNTViYTM5MyIsImlhdCI6MTY0NjgzMTM0OCwiZXhwIjoxNjQ2ODMyMjQ4fQ.BxnkmKQaCCjUXx1LI7YCqUvv0HJnNqG6UKALHm7PQxQ",
+        },
+      });
+      setCurrentPosts(res.data);
+    };
+    fetchPosts();
   }, []);
 
   const textareaInputHandler = (e) => {

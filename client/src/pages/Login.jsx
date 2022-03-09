@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const axios = require("axios");
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const emailInputHandler = (e) => {
     setEmail(e.target.value);
@@ -20,12 +22,13 @@ const Login = () => {
       email: email,
       password: password,
     });
-    const posts = await axios.get("/users/timeline", {
-      headers: {
-        authorization: "Bearer " + response.data.token,
-      },
-    });
-    console.log(posts.data);
+    history.push("/home");
+    // const posts = await axios.get("/users/timeline", {
+    //   headers: {
+    //     authorization: "Bearer " + response.data.token,
+    //   },
+    // });
+    // console.log(posts.data);
   };
 
   return (

@@ -9,6 +9,9 @@ function App() {
       <Route path="/">
         <Login />
       </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
     </div>
   );
 }
