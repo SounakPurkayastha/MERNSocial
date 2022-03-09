@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
@@ -13,7 +14,11 @@ router.post("/register", async (req, res) => {
   };
   try {
     await User(user).save();
-    res.send("successful");
+    res.send({
+      id: user.id,
+      username: user.username,
+      token: generateToken(user.id),
+    });
   } catch (err) {
     console.log(err);
   }
@@ -27,11 +32,22 @@ router.post("/login", async (req, res) => {
     if (!user) return res.send("User not found");
     console.log(user);
     const isCorrectPassword = bcrypt.compareSync(password, user.password);
-    if (isCorrectPassword) res.send("logged in");
-    else res.send("incorrect password");
+    if (isCorrectPassword) {
+      res.send({
+        id: user.id,
+        username: user.username,
+        token: generateToken(user.id),
+      });
+    } else res.send("incorrect password");
   } catch (err) {
     console.log(err);
   }
 });
+
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: "30d",
+  });
+};
 
 module.exports = router;

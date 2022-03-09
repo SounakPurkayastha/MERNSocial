@@ -14,7 +14,7 @@ const Home = () => {
   const [currentPosts, setCurrentPosts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/users/6224d6e2986de03afe73f378/timeline/")
+    fetch("http://localhost:8000/api/users/6224dd600bf50bae155ba393/timeline/")
       .then((response) => {
         return response.json();
       })

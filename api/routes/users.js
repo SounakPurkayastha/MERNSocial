@@ -1,23 +1,35 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
-const { append } = require("express/lib/response");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 const Post = require("../models/post");
 
+const verifyToken = (req, res, next) => {
+  const auth = req.headers.authentication;
+  if (auth) {
+    const token = auth.split(" ")[1];
+    jwt.verify(token, process.env.JWT_SECRET, (err, user_id) => {
+      if (err) {
+        return res.status(403).json("Invalid token");
+      }
+      req.user = user_id;
+      next();
+    });
+  } else {
+    res.status(401).json("You are not authorized");
+  }
+};
+
 //get timeline posts
-router.get("/:id/timeline", async (req, res) => {
-  const user = await User.findById(req.params.id);
-  const userPosts = await Post.find({ userId: req.params.id }).populate(
-    "userId"
-  );
+router.get("/timeline", verifyToken, async (req, res) => {
+  const user = await User.findById(req.user.id);
+  const userPosts = await Post.find({ userId: req.user.id }).populate("userId");
   /// something new here
   const friendPosts = await Promise.all(
     user.followings.map((following) => {
-      return Post.find({ userId: following })
-        .populate("userId", "username")
-        .populate("userId", "email");
+      return Post.find({ userId: following }).populate("userId");
     })
   );
   const allPosts = userPosts.concat(...friendPosts);

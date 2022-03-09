@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 //connecting to mongodb
 mongoose.connect("mongodb://localhost:27017/project").then(() => {
