@@ -14,12 +14,18 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const formSubmitHandler = async () => {
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
     const response = await axios.post("/auth/login", {
       email: email,
       password: password,
     });
-    console.log(response);
+    const posts = await axios.get("/users/timeline", {
+      headers: {
+        authorization: "Bearer " + response.data.token,
+      },
+    });
+    console.log(posts.data);
   };
 
   return (
@@ -37,8 +43,10 @@ const Login = () => {
           value={password}
           onChange={passwordInputHandler}
         />
-        <button type="submit" />
+        <button type="submit">SUBMIT</button>
       </form>
     </div>
   );
 };
+
+export default Login;
